@@ -1,6 +1,10 @@
 cd $HOME
 
-# Create detection workspace in home directory
+# Create detection workspace in home directory (delete if already exists)
+DIRECTORY="./detection_ws"
+if [ -d "$DIRECTORY" ]; then
+  rm -rf detection_ws
+fi
 mkdir detection_ws
 
 # Create sub-workspace for the project
