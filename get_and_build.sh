@@ -29,10 +29,9 @@ catkin build"
 printf "\n---- Create colcon_ws ----\n" 
 cd $HOME/detection_ws/colcon_ws
 mkdir src && cd src
+git clone https://github.com/h-valdes/dotfiles.git
 git clone https://github.com/h-valdes/infrared-tracking.git
 git clone https://git.informatik.tu-freiberg.de/SoftwareentwicklungUndRobotik/Programming/alphabots/ros2/apriltag_msgs.git
-# cd infrared-tracking
-# git checkout ros2
 cd $HOME/detection_ws/colcon_ws
 gnome-terminal --wait -- /bin/bash -c "source /opt/ros/foxy/setup.bash; \
 cd ~/detection_ws/colcon_ws; \
