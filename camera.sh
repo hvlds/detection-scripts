@@ -19,12 +19,11 @@ exec bash" &
 sleep 2
 
 gnome-terminal -- /bin/bash -c "source ${SCRIPTS_DIR}/start_foxy.sh; \
-ros2 topic echo /irtracking/raw_tag_detections; \
+ros2 run rqt_image_view rqt_image_view; \
 exec bash" &
 
 sleep 2
 
 gnome-terminal -- /bin/bash -c "source ${SCRIPTS_DIR}/start_foxy.sh; \
-ros2 run rqt_image_view rqt_image_view; \
-
+ros2 topic echo /raw_tag_detections; \
 exec bash" &
