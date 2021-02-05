@@ -25,17 +25,7 @@ gnome-terminal --wait -- /bin/bash -c "source /opt/ros/noetic/setup.bash; \
 cd ~/detection_ws/catkin_ws; \
 catkin build"
 
-# Create colcon_ws (ROS2)
-printf "\n---- Create colcon_ws ----\n" 
-cd $HOME/detection_ws/colcon_ws
-mkdir src && cd src
-git clone https://github.com/h-valdes/dotfiles.git
-git clone https://github.com/h-valdes/infrared-tracking.git
-git clone https://git.informatik.tu-freiberg.de/SoftwareentwicklungUndRobotik/Programming/alphabots/ros2/apriltag_msgs.git
-cd $HOME/detection_ws/colcon_ws
-gnome-terminal --wait -- /bin/bash -c "source /opt/ros/foxy/setup.bash; \
-cd ~/detection_ws/colcon_ws; \
-colcon build"
+. $HOME/scripts/create_colcon_ws.sh
 
 # Create bridge_ws (ros1_bridge)
 printf "\n---- Create bridge_ws ----\n" 
