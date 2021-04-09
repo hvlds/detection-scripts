@@ -11,8 +11,12 @@ def echo_apriltag(exec_dir):
         "exec bash' &"
     )
 
-def start_bag(exec_dir):
-    pass
+def start_bag(exec_dir, output_file):
+    os.system(
+        f"gnome-terminal -- /bin/bash -c '. {exec_dir}/start_foxy.sh;"
+        f"ros2 bag record /tag_detections -o {output_file};"
+        "exec bash' &"
+    )
 
 
 if __name__ == "__main__":
@@ -25,3 +29,5 @@ if __name__ == "__main__":
     for step in exec_list:
         step(script_dir)
         time.sleep(4)
+    
+    start_bag(script_dir, "test1")
