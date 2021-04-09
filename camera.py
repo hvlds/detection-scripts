@@ -62,8 +62,7 @@ def start_image_viewer(exec_dir):
         "ros2 run rqt_image_view rqt_image_view;"
         "exec bash' &")
 
-
-if __name__ == "__main__":
+def only_irmarker():
     exec_list = [start_camera, start_bridge, start_static_tf, 
         start_irtracking, start_image_viewer]
     script_path = os.path.realpath(sys.argv[0])
@@ -73,3 +72,6 @@ if __name__ == "__main__":
     for step in exec_list:
         step(script_dir)
         time.sleep(2)
+
+if __name__ == "__main__":
+    only_irmarker()
