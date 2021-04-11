@@ -18,8 +18,7 @@ def start_bag(exec_dir, output_file):
         "exec bash' &"
     )
 
-
-if __name__ == "__main__":
+def test_apriltag(output):
     exec_list = [start_camera, start_bridge, echo_apriltag]
 
     script_path = os.path.realpath(sys.argv[0])
@@ -30,4 +29,4 @@ if __name__ == "__main__":
         step(script_dir)
         time.sleep(4)
     
-    start_bag(script_dir, "test1")
+    start_bag(script_dir, output)
