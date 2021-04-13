@@ -1,7 +1,7 @@
 import os
 import time
 import sys
-from camera import start_camera, start_bridge, start_image_viewer
+from camera import start_camera, start_bridge, start_image_viewer, only_irmarker
 from utils import *
 
 def echo_apriltag(exec_dir):
@@ -11,10 +11,17 @@ def echo_apriltag(exec_dir):
         "exec bash' &"
     )
 
-def start_bag(exec_dir, output_file):
+def start_apriltag_bag(exec_dir, output_file):
     os.system(
         f"gnome-terminal -- /bin/bash -c '. {exec_dir}/start_foxy.sh;"
         f"ros2 bag record /tag_detections -o bag_{output_file};"
+        "exec bash' &"
+    )
+
+def start_irmarker_bag(exec_dir, output_file):
+    os.system(
+        f"gnome-terminal -- /bin/bash -c '. {exec_dir}/start_foxy.sh;"
+        f"ros2 bag record /irtracking/tag_detections -o bag_{output_file};"
         "exec bash' &"
     )
 
@@ -29,4 +36,14 @@ def test_apriltag(output):
         step(script_dir)
         time.sleep(4)
     
-    start_bag(script_dir, output)
+    start_apriltag_bag(script_dir, output)
+
+
+def start_irmarker(output):
+    only_irmarker()
+
+    script_path = os.path.realpath(sys.argv[0])
+    temp_dir = script_path.split("/")
+    script_dir = "/".join(temp_dir[0:-1]) + "/bash_scripts"
+
+    start_irmarker_bag(script_dir, output)

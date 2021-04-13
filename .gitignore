@@ -10,6 +10,8 @@ bag_*/
 
 test1/
 test2/
+test1_ir/
+test2_ir/
 
 # Distribution / packaging
 .Python

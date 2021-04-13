@@ -77,7 +77,7 @@ def only_irmarker():
 
     for step in exec_list:
         step(script_dir)
-        time.sleep(2)
+        time.sleep(4)
 
 if __name__ == "__main__":
     only_irmarker()

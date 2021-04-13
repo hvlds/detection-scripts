@@ -4,7 +4,7 @@ from create_catkin_ws import build_catkin_ws
 from create_colcon_ws import build_colcon_ws
 from create_bridge_ws import build_bridge_ws
 from camera import only_irmarker
-from test import test_apriltag
+from test import test_apriltag, test_irmarker
 import click
 
 
@@ -46,8 +46,13 @@ def launch_irmarker():
 
 @cli.command()
 @click.option("-o", "--output", "output", required=True, type=str)
-def test(output):
+def apriltag(output):
     test_apriltag(output)
+
+@cli.command()
+@click.option("-o", "--output", "output", required=True, type=str)
+def irmarker(output):
+    test_irmarker(output)
 
 
 if __name__ == "__main__":
