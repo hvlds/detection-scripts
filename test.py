@@ -1,7 +1,7 @@
 import os
 import time
 import sys
-from camera import start_camera, start_bridge
+from camera import start_camera, start_bridge, start_image_viewer
 from utils import *
 
 def echo_apriltag(exec_dir):
@@ -14,12 +14,12 @@ def echo_apriltag(exec_dir):
 def start_bag(exec_dir, output_file):
     os.system(
         f"gnome-terminal -- /bin/bash -c '. {exec_dir}/start_foxy.sh;"
-        f"ros2 bag record /tag_detections -o {output_file};"
+        f"ros2 bag record /tag_detections -o bag_{output_file};"
         "exec bash' &"
     )
 
 def test_apriltag(output):
-    exec_list = [start_camera, start_bridge, echo_apriltag]
+    exec_list = [start_camera, start_bridge, start_image_viewer, echo_apriltag]
 
     script_path = os.path.realpath(sys.argv[0])
     temp_dir = script_path.split("/")
