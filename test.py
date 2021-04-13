@@ -39,7 +39,7 @@ def test_apriltag(output):
     start_apriltag_bag(script_dir, output)
 
 
-def start_irmarker(output):
+def test_irmarker(output):
     only_irmarker()
 
     script_path = os.path.realpath(sys.argv[0])
