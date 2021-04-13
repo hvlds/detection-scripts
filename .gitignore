@@ -8,6 +8,9 @@ __pycache__/
 
 bag_*/
 
+test1/
+test2/
+
 # Distribution / packaging
 .Python
 build/

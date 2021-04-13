@@ -62,9 +62,15 @@ def start_image_viewer(exec_dir):
         "ros2 run rqt_image_view rqt_image_view;"
         "exec bash' &")
 
+def echo_tag_detections(exec_dir):
+    os.system(
+        f"gnome-terminal -- /bin/bash -c '. {exec_dir}/start_foxy.sh;"
+        "ros2 topic echo /irtracking/tag_detections;"
+        "exec bash' &")
+
 def only_irmarker():
     exec_list = [start_camera, start_bridge, start_static_tf, 
-        start_irtracking, start_image_viewer]
+        start_irtracking, start_image_viewer, echo_tag_detections]
     script_path = os.path.realpath(sys.argv[0])
     temp_dir = script_path.split("/")
     script_dir = "/".join(temp_dir[0:-1]) + "/bash_scripts"
