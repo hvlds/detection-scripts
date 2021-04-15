@@ -8,6 +8,8 @@ __pycache__/
 
 bag_*/
 
+results/
+
 test1/
 test2/
 test1_ir/
