@@ -9,6 +9,7 @@ __pycache__/
 bag_*/
 
 results/
+*.png
 
 test1/
 test2/
