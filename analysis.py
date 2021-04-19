@@ -57,5 +57,26 @@ def plot_absolute_differences():
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.savefig(f"absolute_differences.png", bbox_inches="tight")
 
+def plot_std():
+    distances = [68, 126, 165, 204]
+    apriltag_s3 = [0.019, 0.093, 0.193, 0.319]
+    apriltag_s2 = [0.028, 0.113, 0.231, 0.450]
+    irmarker = [0.113, 0.993, 21.539, 4.475]
+    
+    distances = np.array(distances)
+    apriltag_s3 = np.array(apriltag_s3)
+    apriltag_s2 = np.array(apriltag_s2)
+    irmarker = np.array(irmarker)
+
+    plt.plot(distances, apriltag_s3, marker = 'o', label="apriltag_s3")
+    plt.plot(distances, apriltag_s2, marker = 'o', label="apriltag_s2")
+    plt.plot(distances, irmarker, marker = 'o', label="irmarker")
+
+    plt.xlabel("Ground Truth Distanz [cm]")
+    plt.ylabel(f"Standardabweichung")
+
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.savefig(f"std_summary.png", bbox_inches="tight")
+
 if __name__ == "__main__":
-    plot_absolute_differences()
+    plot_std()
