@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 import os
 import shutil
 
@@ -18,10 +20,9 @@ def print_info(csv_path, output_dir):
         with open(f"{output_dir}/{name}_{component}.txt", "w+") as f:
             f.write(str(avg) + "\n")       
             f.write(str(std) + "\n")       
-            f.write(str(count) + "\n")       
-        
+            f.write(str(count) + "\n")
 
-if __name__ == "__main__":
+def summary_generator():
     results_dir = "./results"
     if not os.path.exists(results_dir):
         os.mkdir(results_dir)
@@ -33,4 +34,28 @@ if __name__ == "__main__":
     for single_file in os.listdir(base_dir):
         file_extension = single_file.split(".")[-1]
         if file_extension == "csv":
-            print_info(single_file, results_dir)
+            print_info(single_file, results_dir)      
+
+def plot_absolute_differences():
+    distances = [68, 126, 165, 204]
+    apriltag_s3 = [1.105, 2.164, 3.392, 4.128]
+    apriltag_s2 = [1.527, 3.436, 4.22, 8.211]
+    irmarker = [3.446, 7.511, 37.829, 56.802]
+    
+    distances = np.array(distances)
+    apriltag_s3 = np.array(apriltag_s3)
+    apriltag_s2 = np.array(apriltag_s2)
+    irmarker = np.array(irmarker)
+
+    plt.plot(distances, apriltag_s3, marker = 'o', label="apriltag_s3")
+    plt.plot(distances, apriltag_s2, marker = 'o', label="apriltag_s2")
+    plt.plot(distances, irmarker, marker = 'o', label="irmarker")
+
+    plt.xlabel("Ground Truth Distanz [cm]")
+    plt.ylabel(f"Absolute Differenz zu der Ground Truth [cm]")
+
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.savefig(f"absolute_differences.png", bbox_inches="tight")
+
+if __name__ == "__main__":
+    plot_absolute_differences()
