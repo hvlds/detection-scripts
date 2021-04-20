@@ -12,7 +12,7 @@ def clone_repositories(base_dir):
 
 
 def build_catkin_ws():
-    clone_repositories(catkin_ws)
+    # clone_repositories(catkin_ws)
     os.system(
         f"cd {catkin_ws};"
         "gnome-terminal --wait -- /bin/bash -c 'source /opt/ros/noetic/setup.bash;"

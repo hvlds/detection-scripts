@@ -26,7 +26,7 @@ def build_pkgs(base_dir):
         "colcon build")
 
 def build_colcon_ws():
-    check_directory(colcon_ws)
+    # check_directory(colcon_ws)
     build_pkgs(colcon_ws)
 
 

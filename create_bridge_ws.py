@@ -8,7 +8,7 @@ def clone_repositories(base_dir):
         "git clone https://github.com/h-valdes/ros1_bridge.git;")
 
 def build_bridge_ws():
-    clone_repositories(bridge_ws)
+    # clone_repositories(bridge_ws)
     os.system(
         "gnome-terminal --wait -- /bin/bash -c 'source /opt/ros/foxy/setup.bash;"
         "source ~/detection_ws/colcon_ws/install/local_setup.bash;"

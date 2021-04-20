@@ -35,6 +35,18 @@ def install():
     build_colcon_ws()
     build_bridge_ws()
 
+@cli.command()
+def build():
+    """Build all the workspaces
+    """
+    click.echo("Building...")
+
+    # Clone and build the projects on their respective workspaces
+    # (ROS1, ROS2 and ros1_bridge)
+    build_catkin_ws()
+    build_colcon_ws()
+    build_bridge_ws()
+
 
 @cli.command()
 def launch_irmarker():
