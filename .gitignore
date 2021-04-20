@@ -8,6 +8,7 @@ __pycache__/
 
 bag_*/
 
+csv/
 results/
 *.png
 
