@@ -2,3 +2,4 @@ click
 pandas
 numpy
 matplotlib
+sklearn

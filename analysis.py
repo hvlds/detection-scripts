@@ -1,8 +1,9 @@
+import os
+import shutil
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
-import shutil
+from sklearn.linear_model import LinearRegression
 
 
 def print_info(csv_path, output_dir):
@@ -78,5 +79,32 @@ def plot_std():
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.savefig(f"std_summary.png", bbox_inches="tight")
 
+def plot_lregression():
+    base_dir = "./results"
+    for single_file in os.listdir(base_dir):
+        file_extension = single_file.split(".")[-1]
+        if file_extension == "csv":
+            data = pd.read_csv(f"{base_dir}/{single_file}")
+            output = single_file.split(".")[0] + "_lregression"
+
+            for component in ["x", "y", "z"]:
+                X = data["time"].values.reshape(-1, 1)
+                Y = data[component].values.reshape(-1, 1)
+
+                linear_regressor = LinearRegression()
+                linear_regressor.fit(X, Y)
+                Y_pred = linear_regressor.predict(X)
+
+                plt.scatter(X, Y, label=f"Position in {component.upper()}-Richtung")
+                plt.plot(X, Y_pred, color="red", label="Lineare Regression")
+                
+                plt.xlabel("Zeit [s]")
+                plt.ylabel(f"Position in {component.upper()}-Richtung [cm]")
+
+                plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+                plt.savefig(f"{output}_{component}.png", bbox_inches="tight")
+
+                plt.clf()
+
 if __name__ == "__main__":
-    plot_std()
+    plot_lregression()
