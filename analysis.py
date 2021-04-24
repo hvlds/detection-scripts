@@ -110,5 +110,70 @@ def plot_lregression():
 
                 plt.clf()
 
+def plot_lregression_diff():
+    csv_path = "infrared_test3.csv"
+    data = pd.read_csv(f"./results/{csv_path}")
+    output = csv_path.split(".")[0] + "_lregression_split"
+
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+
+    X = data["time"].values
+    Y = data["z"].values
+    half_pos = int(len(Y) / 2)
+    Y_1 = Y[:half_pos].reshape(-1, 1)
+    Y_2 = Y[half_pos:].reshape(-1, 1)
+
+    X_1 = X[:half_pos].reshape(-1, 1)
+    X_2 = X[half_pos:].reshape(-1, 1)
+
+    linear_regressor_1 = LinearRegression()
+    linear_regressor_1.fit(X_1, Y_1)
+    Y_1_pred = linear_regressor_1.predict(X_1)
+
+    linear_regressor_2 = LinearRegression()
+    linear_regressor_2.fit(X_2, Y_2)
+    Y_2_pred = linear_regressor_2.predict(X_2)
+
+    coef_1 = linear_regressor_1.coef_[0][0]
+    intercept_1 = round(linear_regressor_1.intercept_[0], 3)
+
+    coef_2 = linear_regressor_2.coef_[0][0]
+    intercept_2 = round(linear_regressor_2.intercept_[0], 3)
+
+    all_labels = [
+        f"Lineare Regression: z = {coef_1:.3e}t + {intercept_1}",
+        f"Position in Z-Richtung",
+        f"Lineare Regression: z = {coef_2:.3e}t + {intercept_2}",
+        f"Position in Z-Richtung"
+    ]
+
+    ax1.scatter(X_1, Y_1, color="orange")
+    l1 = ax1.plot(X_1, Y_1_pred, color="green")
+    ax1.autoscale()
+
+    ax1.set_xlabel("Zeit [s]")
+    ax1.set_ylabel(f"Position in Z-Richtung [cm]")
+
+    ax2.scatter(X_2, Y_2)
+    l2 = ax2.plot(X_2, Y_2_pred, color="red")
+    ax2.autoscale()
+
+    ax2.set_xlabel("Zeit [s]")
+    ax2.set_ylabel(f"Position in Z-Richtung [cm]")
+
+    lg = fig.legend(
+        bbox_to_anchor=(1.05,1), 
+        labels=all_labels, 
+        loc='upper left',
+        borderaxespad=0.1)
+    fig.align_labels()
+    plt.subplots_adjust(right=1.1)
+    plt.savefig(
+        f"{output}_z.png", 
+        bbox_extra_artists=(lg,),
+        bbox_inches="tight")
+
+    plt.clf()
+
 if __name__ == "__main__":
-    plot_lregression()
+    plot_lregression_diff()
