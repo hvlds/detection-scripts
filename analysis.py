@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
 
 def print_info(csv_path, output_dir):
@@ -95,8 +96,11 @@ def plot_lregression():
                 linear_regressor.fit(X, Y)
                 Y_pred = linear_regressor.predict(X)
 
+                coef = linear_regressor.coef_[0][0]
+                intercept = round(linear_regressor.intercept_[0], 3)
+
                 plt.scatter(X, Y, label=f"Position in {component.upper()}-Richtung")
-                plt.plot(X, Y_pred, color="red", label="Lineare Regression")
+                plt.plot(X, Y_pred, color="red", label=f"Lineare Regression: z = {coef:.3e}t + {intercept}")
                 
                 plt.xlabel("Zeit [s]")
                 plt.ylabel(f"Position in {component.upper()}-Richtung [cm]")
